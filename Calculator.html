@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Calculator | Andreas</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-blue-100 min-h-screen">
+
+  <header class="bg-blue-900 text-white py-4 text-center font-bold text-xl shadow-lg">
+    Kalkulator Web
+  </header>
+
+  <nav class="bg-blue-700 text-white">
+    <div class="flex justify-center gap-8 py-3 font-semibold">
+      <a href="index.html" class="hover:text-yellow-300">Home</a>
+      <a href="about.html" class="hover:text-yellow-300">About</a>
+      <a href="gallery.html" class="hover:text-yellow-300">Gallery</a>
+      <a href="calculator.html" class="hover:text-yellow-300">Calculator</a>
+      <a href="registration.html" class="hover:text-yellow-300">Registration</a>
+    </div>
+  </nav>
+
+  <div class="flex items-center justify-center mt-16">
+    <main class="bg-white shadow-xl rounded-xl p-6 w-[320px]">
+      <h2 class="text-center text-2xl font-bold text-blue-800 mb-4">Kalkulator</h2>
+
+      <input id="display" type="text" readonly
+        class="w-full h-14 text-right px-4 mb-4 text-2xl font-bold rounded-lg border border-blue-600 bg-blue-50" 
+        value="0">
+
+      <div id="buttons" class="grid grid-cols-4 gap-3">
+        <button data-value="7" class="btn">7</button>
+        <button data-value="8" class="btn">8</button>
+        <button data-value="9" class="btn">9</button>
+        <button data-op="/" class="btn operator">÷</button>
+
+        <button data-value="4" class="btn">4</button>
+        <button data-value="5" class="btn">5</button>
+        <button data-value="6" class="btn">6</button>
+        <button data-op="*" class="btn operator">×</button>
+
+        <button data-value="1" class="btn">1</button>
+        <button data-value="2" class="btn">2</button>
+        <button data-value="3" class="btn">3</button>
+        <button data-op="-" class="btn operator">−</button>
+
+        <button data-value="0" class="btn">0</button>
+        <button data-value="." class="btn">.</button>
+        <button id="clear" class="btn clear">C</button>
+        <button data-op="+" class="btn operator">+</button>
+
+        <button id="equal" class="col-span-4 equal">=</button>
+      </div>
+
+      <marquee class="mt-4 text-sm text-blue-700 font-semibold">
+        Aplikasi ini dibuat oleh Andreas Yosafat Siagian | NIM 2482024
+      </marquee>
+    </main>
+  </div>
+
+  <footer class="bg-blue-700 text-white text-center py-4 mt-16 font-semibold">
+    © 2025 - Andreas Yosafat Siagian | Sistem Informasi - UNAI
+  </footer>
+
+  <script>
+    const display = document.getElementById("display");
+    const buttons = document.getElementById("buttons");
+    const clearBtn = document.getElementById("clear");
+    const equalBtn = document.getElementById("equal");
+
+    let firstNumber = "";
+    let secondNumber = "";
+    let operator = "";
+
+    buttons.addEventListener("click", function (e) {
+      const value = e.target.getAttribute("data-value");
+      const op = e.target.getAttribute("data-op");
+
+      if (op) {
+        if (firstNumber !== "") operator = op;
+        return;
+      }
+
+      if (value) {
+        if (!operator) {
+          firstNumber += value;
+          display.value = firstNumber;
+        } else {
+          secondNumber += value;
+          display.value = secondNumber;
+        }
+      }
+    });
+
+    equalBtn.addEventListener("click", function () {
+      if (firstNumber === "" || secondNumber === "") return;
+
+      const num1 = parseFloat(firstNumber);
+      const num2 = parseFloat(secondNumber);
+      let result = 0;
+
+      if (operator === "+") result = num1 + num2;
+      if (operator === "-") result = num1 - num2;
+      if (operator === "*") result = num1 * num2;
+      if (operator === "/") result = num1 / num2;
+
+      display.value = result;
+      firstNumber = result.toString();
+      secondNumber = "";
+      operator = "";
+    });
+
+    clearBtn.addEventListener("click", function () {
+      firstNumber = "";
+      secondNumber = "";
+      operator = "";
+      display.value = "0";
+    });
+  </script>
+
+  <style>
+    .btn {
+      background-color: #e0e7ff;
+      font-weight: bold;
+      border-radius: 8px;
+      padding: 12px;
+      transition: 0.2s;
+    }
+    .btn:hover { background-color: #c7d2fe; }
+    .operator { background-color: #3b82f6; color: white; }
+    .operator:hover { background-color: #1d4ed8; }
+    .clear { background-color: #ef4444; color: white; }
+    .clear:hover { background-color: #dc2626; }
+    .equal {
+      background-color: #1e40af;
+      color: white;
+      font-weight: bold;
+      padding: 12px;
+      border-radius: 8px;
+    }
+    .equal:hover { background-color: #1e3a8a; }
+  </style>
+
+</body>
+</html>

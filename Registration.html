@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Index | Registration Andreas</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-blue-100">
+
+  <header class="bg-blue-900 text-white py-4 text-center font-bold text-xl shadow-lg">
+    Form Registration
+  </header>
+
+  <nav class="bg-blue-700 text-white">
+    <div class="flex justify-center gap-8 py-3 font-semibold">
+      <a href="index.html" class="hover:text-yellow-300">Home</a>
+      <a href="about.html" class="hover:text-yellow-300">About</a>
+      <a href="gallery.html" class="hover:text-yellow-300">Gallery</a>
+      <a href="calculator.html" class="hover:text-yellow-300">Calculator</a>
+      <a href="registration.html" class="hover:text-yellow-300">Registration</a>
+    </div>
+  </nav>
+
+  <main class="max-w-xl mx-auto bg-white mt-10 p-8 rounded-xl shadow-lg">
+    <h2 class="text-2xl font-bold text-center text-blue-800 mb-6">Formulir Pendaftaran</h2>
+
+    <form id="regForm" class="space-y-4">
+
+      <div>
+        <label class="font-semibold">First Name</label>
+        <input type="text" id="firstName" maxlength="40" class="w-full p-2 border rounded-lg" required>
+      </div>
+
+      <div>
+        <label class="font-semibold">Last Name</label>
+        <input type="text" id="lastName" maxlength="40" class="w-full p-2 border rounded-lg" required>
+      </div>
+
+      <div>
+        <label class="font-semibold">NIM</label>
+        <input type="number" id="nim" class="w-full p-2 border rounded-lg" required>
+      </div>
+
+      <div>
+        <label class="font-semibold">Phone Number</label>
+        <input type="number" id="phone" class="w-full p-2 border rounded-lg" required>
+      </div>
+
+      <div>
+        <label class="font-semibold">Email (@unai.edu)</label>
+        <input type="email" id="email" class="w-full p-2 border rounded-lg" required>
+      </div>
+
+      <div>
+        <label class="font-semibold">Password</label>
+        <input type="password" id="password" class="w-full p-2 border rounded-lg" required>
+        <p class="text-sm text-gray-600 mt-1">
+          Min 8 - Max 16 karakter, 1 huruf besar, 1 huruf kecil, 1 angka, tanpa simbol.
+        </p>
+      </div>
+
+      <button type="submit"
+        class="w-full bg-blue-700 text-white py-3 rounded-lg font-bold hover:bg-blue-900">
+        SUBMIT
+      </button>
+
+    </form>
+  </main>
+
+  <footer class="bg-blue-700 text-white text-center py-4 mt-10 font-semibold">
+    © 2025 - Andreas Yosafat Siagian | Sistem Informasi - UNAI
+  </footer>
+
+  <script>
+    document.getElementById("regForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const firstName = document.getElementById("firstName").value.trim();
+      const lastName = document.getElementById("lastName").value.trim();
+      const nim = document.getElementById("nim").value.trim();
+      const phone = document.getElementById("phone").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value;
+
+      if (nim.length > 7) {
+        alert("NIM maksimal 7 digit!");
+        return;
+      }
+
+      if (phone.length > 15) {
+        alert("Nomor telepon maksimal 15 digit!");
+        return;
+      }
+
+      if (!email.endsWith("@unai.edu")) {
+        alert("Email harus menggunakan domain @unai.edu!");
+        return;
+      }
+
+      const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,16}$/;
+      if (!passwordRegex.test(password)) {
+        alert("Password tidak memenuhi syarat!");
+        return;
+      }
+
+      alert("Registration Successful");
+      document.getElementById("regForm").reset();
+    });
+  </script>
+
+</body>
+</html>
